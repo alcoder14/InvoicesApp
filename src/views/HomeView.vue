@@ -1,18 +1,111 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main>
+    <NavbarSection />
+    <section class="content-section">
+
+      <div class="container">
+        
+        <div class="menu">
+          <div class="left-side">
+            <h1 class="invoices-title">Invoices</h1>
+            <h3 class="invoices-number">There are {{ totalInvoices }} total invoices</h3>
+          </div>
+          <div class="right-side">
+            <select class="dropdown">
+              <option value="all">All</option>
+              <option value="paid">Paid</option>
+              <option value="pending">Pending</option>
+              <option value="draft">Draft</option>
+            </select>
+            <button class="purple-btn" @click="openInvoiceModal"> <font-awesome-icon icon="fa fa-plus" class="button-icon" /> Add Invoice </button>
+          </div>
+        </div>
+
+      </div>
+      
+    </section>
+  </main>
+
+  <InvoiceModal v-if="invoiceModalVisible" modalType="Add New Invoice" />
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+import NavbarSection from '@/sections/NavbarSection.vue';
+import InvoiceModal from '../modals/InvoiceModal.vue';
 
 export default {
-  name: 'HomeView',
   components: {
-    HelloWorld
+    NavbarSection,
+    InvoiceModal
+  },
+  data(){
+    return{
+      invoices: [],
+      totalInvoices: null,
+      invoiceModalVisible: false
+    }
+  },
+  mounted(){
+    this.manageLocalStorage()
+  },
+  methods: {
+    manageLocalStorage(){
+      if(localStorage.getItem("Invoices") === null){
+        localStorage.setItem("Invoices", JSON.stringify([]))
+      } else {
+        this.invoices = JSON.parse(localStorage.getItem("Invoices"))
+        this.totalInvoices = this.invoices.length
+      }
+    },
+
+    openInvoiceModal(){
+      this.invoiceModalVisible = true
+    }
+
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import "@/assets/global.scss";
+  main{
+    @include flex-row()
+  }
+
+  .menu{
+    @include flex-row();
+    justify-content: space-between;
+  }
+  .right-side{
+    @include flex-row();
+    align-items: center;
+  }
+
+  .invoices-title{
+    color: $white;
+    font-size: 6rem;
+    margin-bottom: 1rem;
+  }
+  .invoices-number{
+    font-size: 2rem;
+    color: $grey;
+  }
+  .dropdown, button{
+    font-size: 2.5rem;
+    margin-right: 2rem;
+    padding: 8px 14px;
+  }
+  button{
+    @include flex-row();
+    align-items: center;
+  }
+
+
+  @media(max-width: 950px){
+    main{
+        @include flex-column()
+    }
+
+}
+</style>
