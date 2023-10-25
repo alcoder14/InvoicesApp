@@ -85,7 +85,7 @@ export default {
   .invoices-title{
     color: $white;
     font-size: 6rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   .invoices-number{
     font-size: 2rem;
@@ -101,11 +101,40 @@ export default {
     align-items: center;
   }
 
+  @media(max-width: 1368px){
+    .invoices-title{
+      font-size: 5rem;
+    }
+    .dropdown, button{
+      font-size: 2.2rem;
+     }
 
+  }
+  @media(max-width: 1140px){
+    .invoices-title{
+      font-size: 4rem;
+    }
+    .dropdown, button{
+      font-size: 1.9rem;
+     }
+
+  }
   @media(max-width: 950px){
     main{
         @include flex-column()
     }
+  }
+  @media(max-width: 700px){
+    .dropdown{
+      display: none;
+    }
+    .invoices-title{
+      font-size: 3.6rem;
+      margin-bottom: 0.3rem;
+    }
+    .invoices-number{
+      font-size: 1.7rem;
+    }
 
-}
+  }
 </style>

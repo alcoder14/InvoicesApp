@@ -34,12 +34,12 @@ $red: #ea595b;
 
 @media(max-width: 1368px){
     .container{
-        max-width: 900px;
+        max-width: 870px;
     }
 }
 @media(max-width: 1140px){
     .container{
-        max-width: 700px;
+        max-width: 650px;
     }
 }
 @media(max-width: 950px){
@@ -52,6 +52,11 @@ $red: #ea595b;
         width: 100%;
         padding: 50px;
         margin-top: 0;
+    }
+}
+@media(max-width: 700px){
+    .container{
+        padding: 35px;
     }
 }
 
