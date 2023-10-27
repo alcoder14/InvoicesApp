@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import { uuid } from 'vue-uuid'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -10,4 +12,4 @@ import { faCircle, faSun } from '@fortawesome/free-regular-svg-icons'
 
 library.add(faChevronRight, faPlus, faTrash, faXmark, faCircle, faSun);
 
-createApp(App).use(router).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
+createApp(App).use(router).use(uuid).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
